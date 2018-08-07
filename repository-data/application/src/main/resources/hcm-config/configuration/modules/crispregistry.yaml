@@ -1,0 +1,41 @@
+definitions:
+  config:
+    /hippo:configuration/hippo:modules/crispregistry/hippo:moduleconfig/crisp:resourceresolvercontainer/crispDemo:
+      jcr:primaryType: crisp:resourceresolver
+      crisp:beandefinition: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<!--\r\n\
+        \  Copyright 2018 Hippo B.V. (http://www.onehippo.com)\r\n\r\n  Licensed under\
+        \ the Apache License, Version 2.0 (the \"License\");\r\n  you may not use\
+        \ this file except in compliance with the License.\r\n  You may obtain a copy\
+        \ of the License at\r\n\r\n   http://www.apache.org/licenses/LICENSE-2.0\r\
+        \n\r\n  Unless required by applicable law or agreed to in writing, software\r\
+        \n  distributed under the License is distributed on an \"AS IS\" BASIS,\r\n\
+        \  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\r\
+        \n  See the License for the specific language governing permissions and\r\n\
+        \  limitations under the License.\r\n  -->\r\n\r\n\r\n<beans xmlns=\"http://www.springframework.org/schema/beans\"\
+        \r\n       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:context=\"\
+        http://www.springframework.org/schema/context\"\r\n\r\n       xsi:schemaLocation=\"\
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd\r\
+        \n        http://www.springframework.org/schema/context\r\n    http://www.springframework.org/schema/context/spring-context-4.1.xsd\"\
+        >\r\n\r\n  <context:property-placeholder system-properties-mode=\"OVERRIDE\"\
+        \ location=\"file:${catalina.base}/conf/crisp.properties\"/>\r\n\r\n  <bean\
+        \ parent=\"abstractCrispSimpleJacksonRestTemplateResourceResolver\"\r\n  \
+        \      class=\"org.onehippo.cms7.crisp.core.resource.jackson.SimpleJacksonRestTemplateResourceResolver\"\
+        >\r\n    <property name=\"cacheEnabled\" value=\"${cache.enabled}\"/>\r\n\
+        \    <property name=\"baseUri\" value=\"${applicationUrl}\"/>\r\n    <property\
+        \ name=\"restTemplate\">\r\n      <bean class=\"org.springframework.web.client.RestTemplate\"\
+        >\r\n        <property name=\"requestFactory\" ref=\"org.springframework.http.client.ClientHttpRequestFactory\"\
+        />\r\n      </bean>\r\n    </property>\r\n    <property name=\"resourceLinkResolver\"\
+        >\r\n      <bean class=\"org.onehippo.cms7.crisp.core.resource.FreemarkerTemplateResourceLinkResolver\"\
+        >\r\n        <property name=\"templateSource\">\r\n          <value>${applicationUrl}</value>\r\
+        \n        </property>\r\n      </bean>\r\n    </property>\r\n    <property\
+        \ name=\"resourceDataCache\">\r\n      <bean class=\"org.onehippo.cms7.crisp.core.resource.SpringResourceDataCache\"\
+        >\r\n        <constructor-arg>\r\n          <bean class=\"org.springframework.cache.ehcache.EhCacheCache\"\
+        >\r\n            <constructor-arg>\r\n              <bean parent=\"abstractCrispResourceEhCache\"\
+        >\r\n                <property name=\"cacheName\" value=\"demoProductCatalogsCache\"\
+        />\r\n                <property name=\"maxEntriesLocalHeap\" value=\"1000\"\
+        />\r\n                <property name=\"maxEntriesLocalDisk\" value=\"0\"/>\r\
+        \n                <property name=\"timeToLiveSeconds\" value=\"60\"/>\r\n\
+        \                <property name=\"timeToIdleSeconds\" value=\"60\"/>\r\n \
+        \             </bean>\r\n            </constructor-arg>\r\n          </bean>\r\
+        \n        </constructor-arg>\r\n      </bean>\r\n    </property>\r\n  </bean>\r\
+        \n\r\n</beans>"
